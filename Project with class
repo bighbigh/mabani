@@ -234,9 +234,13 @@ for(j=0;j<10;j++){
 }
 return s;
 }
+
+int menu(void)
+
 void read (anbar first, class costumer men[], class food food[],int *cash);
 void save(class food food[],class costumer men[],anbar first,char food1[],char order[],int *cash);
 void load(class food food[],class costumer men[],anbar first,char food1[],char order[],int *cash);
+
 int main (){
 int cash=0;
 anbar first;
@@ -299,10 +303,17 @@ food[0].sign=1;
 for(i=0;i<7;i++){
     men[i].sign=0;
 }
-  for(;;){
-   read(first,men,food,&cash);
-  }
+
+switch(menu()){
+	case 'e':exit(1);break;	
+	case 's':for(;;){
+   read(first,men,food);
+  } break;
+  case 'e':edit();break;
+  case 'a': Sakht();break;
+	default:printf("wrong order");
 }
+
 void
 read (anbar first, class costumer men[], class food food[],int *cash){
 gets (order);
@@ -518,4 +529,19 @@ void load(class food food[],class costumer men[],anbar first,char food1[],char o
    }
 printf("load gardid ! ");
 }
-
+int menu(void){
+	char answer[10];
+	clrscr();
+	
+		gotoxy(20,4);
+		printf("s)for starting the game \n");
+		gotoxy(20,6);
+		printf("a)for adding a food \n");
+		gotoxy(20,8);
+		printf("e)for editing a food \n");
+		gotoxy(20,10);
+		printf("e)for exit the game \n ");
+		gets(answer);
+		return tolower(*answer);
+	
+}
