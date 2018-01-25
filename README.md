@@ -48,6 +48,7 @@ for (i = 0; i < 7; i++)
 
 if (men[i].sign == 0)
 	{
+	memset(men[i].list,0,10);
 	  srand((h++)+time(NULL));
 men[i].sign = rand() % 2;
 
