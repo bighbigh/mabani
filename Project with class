@@ -4,7 +4,7 @@
 #include<stdlib.h>
 #include<ctype.h>
 #include<conio.h>
-int cash=0;
+
 char order[10],food1[20];
 char c[2][20];
 class costumer {
@@ -234,11 +234,11 @@ for(j=0;j<10;j++){
 }
 return s;
 }
-void read (anbar first, class costumer men[], class food food[]);
-void save(class food food[],class costumer men[],anbar first,char food1[],char order[],int cash);
-void load(class food food[],class costumer men[],anbar first,char food1[],char order[],int cash);
+void read (anbar first, class costumer men[], class food food[],int *cash);
+void save(class food food[],class costumer men[],anbar first,char food1[],char order[],int *cash);
+void load(class food food[],class costumer men[],anbar first,char food1[],char order[],int *cash);
 int main (){
-
+int cash=0;
 anbar first;
 first=(Anbar*)malloc(sizeof(Anbar));
 first->link=NULL;
@@ -300,12 +300,13 @@ for(i=0;i<7;i++){
     men[i].sign=0;
 }
   for(;;){
-   read(first,men,food);
+   read(first,men,food,&cash);
   }
 }
 void
-read (anbar first, class costumer men[], class food food[]){
+read (anbar first, class costumer men[], class food food[],int *cash){
 gets (order);
+int d;
   rnd();
 anbar ptr=first;
 if(strstr(order,"save")){
@@ -327,7 +328,7 @@ else if(strstr(order,"load")){
         }*/
 else if(strstr(order,"check")){
     display(first);
-    printf("%d",cash);
+    printf("cash is: %d",*cash);
 }
 else if (strstr(order,"put")){
         int i, j, k, s = 0,t=0,l;
@@ -386,7 +387,7 @@ if (s>0)
 
 		    if (time(NULL)-men[i].timev>men[i].timew){
                     printf("tof tu rut");
-                cash-=hazine(men,i);
+                d=-hazine(men,i);
                 men[i].sign=0;
 		    }
 		    else{
@@ -401,7 +402,7 @@ for(k=0;k<10;k++){
 
 if(l==0){
 		   printf("thanks");
-		   cash+=hazine(men,i);
+		   d=hazine(men,i);
 men[i].sign = 0;
 }
 }
@@ -413,7 +414,7 @@ men[i].sign = 0;
 
 
 }
-
+*cash+=d;
 }
 
 
@@ -461,7 +462,7 @@ break;
 }
 
 }
-void save(class food food[],class costumer men[],anbar first,char food1[],char order[],int cash){
+void save(class food food[],class costumer men[],anbar first,char food1[],char order[],int *cash){
     FILE *fp;
     register int i;
     fp=fopen("file.text","wb");
@@ -487,7 +488,7 @@ void save(class food food[],class costumer men[],anbar first,char food1[],char o
    fclose(fp);
     printf("save gardid!");
 }
-void load(class food food[],class costumer men[],anbar first,char food1[],char order[],int cash){
+void load(class food food[],class costumer men[],anbar first,char food1[],char order[],int *cash){
  FILE *fp;
     register int i;
     fp=fopen("file.text","rb");
