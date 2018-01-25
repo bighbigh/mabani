@@ -394,7 +394,7 @@ if (s>0)
                 men[i].sign=0;
 		    }
 		    else{
-		    men[i].list[j]=0;
+		    men[i].list[j]=2;
 		    men[i].timew+=10;
 int k;
 l=0;
