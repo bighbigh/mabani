@@ -387,7 +387,11 @@ if (s>0)
 
 		    if (time(NULL)-men[i].timev>men[i].timew){
                     printf("tof tu rut");
-                d=-hazine(men,i);
+                d=0;
+		for(j=0;j<10;j++){
+		if(men[i].list[j]==2)
+		d-=2;
+		}
                 men[i].sign=0;
 		    }
 		    else{
