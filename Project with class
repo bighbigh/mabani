@@ -235,7 +235,7 @@ for(j=0;j<10;j++){
 return s;
 }
 
-int menu(void)
+int menu(void);
 
 void read (anbar first, class costumer men[], class food food[],int *cash);
 void save(class food food[],class costumer men[],anbar first,char food1[],char order[],int *cash);
@@ -313,7 +313,7 @@ switch(menu()){
   case 'a': Sakht();break;
 	default:printf("wrong order");
 }
-
+}
 void
 read (anbar first, class costumer men[], class food food[],int *cash){
 gets (order);
