@@ -315,17 +315,18 @@ if(strstr(order,"save")){
 else if(strstr(order,"load")){
   load(food,men,first,food1,order,cash);
 }
-/*else if(strstr(order,"next"){
+else if(strstr(order,"next")){
         int i,j;
         for(i=0;i<7&&men[i].sign;i++){
             for (j=0;j<10;j++){
                 if(men[i].list[j]==1)
-                    printf("%s: tahvil nagerefte",food[j].name);
+                    printf("person number %d :%s: tahvil nagerefte\n",i,food[j].name);
                 else if(men[i].list[j]==2)
-                printf("%s: tahvil gerefte",food[j].name);
+                printf("person number %d :%s: tahvil gerefte\n",i,food[j].name);
+        }
+	printf("\n");
         }
         }
-        }*/
 else if(strstr(order,"check")){
     display(first);
     printf("cash is: %d",*cash);
