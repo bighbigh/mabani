@@ -832,7 +832,7 @@ read(anbar first, class costumer men[], class food food[], int *cash,int *m) {
 
 		display(first);
 
-		cout << "cash is:" << *cash;
+		cout << "cash is:" << *cash<<"\n";
 
 	}
 
