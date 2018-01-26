@@ -430,14 +430,7 @@ void edit(class food food[]) {
 
 
 
-
-
-
-
 	int i;
-
-
-
 
 
 
@@ -450,17 +443,7 @@ void edit(class food food[]) {
 
 
 
-
-
-
-
-
-
-
-
 	}
-
-
 
 
 
@@ -487,17 +470,11 @@ void edit(class food food[]) {
 		{
 
 
-
-
-
 			printf("\n mavad avalie ghaza ra vared konid ?\n");
 
 
 
 			gets(s);
-
-
-
 
 
 
@@ -509,16 +486,7 @@ void edit(class food food[]) {
 				break;
 
 
-
-
-
-
-
 			else
-
-
-
-
 
 
 
@@ -1209,7 +1177,6 @@ read(anbar first, class costumer men[], class food food[], int *cash) {
 			while (ptr->link != NULL)
 
 
-
 			{
 
 
@@ -1217,21 +1184,12 @@ read(anbar first, class costumer men[], class food food[], int *cash) {
 				ptr = ptr->link;
 
 
-
 				ptr->timeC += time(NULL) - savetime;
-
 
 
 			}
 
-
-
-
-
-
-
 		}
-
 
 
 	}
@@ -1261,9 +1219,6 @@ read(anbar first, class costumer men[], class food food[], int *cash) {
 						printf("person number %d :%s: tahvil nagerefte\n", i, food[j].name);
 					z++;
 
-
-
-
 					else if (men[i].list[j] == 2)
 
 
@@ -1279,11 +1234,7 @@ read(anbar first, class costumer men[], class food food[], int *cash) {
 			}
 			printf("\n");
 
-
-
 		}
-
-
 
 	}
 
@@ -1291,18 +1242,13 @@ read(anbar first, class costumer men[], class food food[], int *cash) {
 
 	else if (strstr(order, "check")) {
 
-
-
 		display(first);
 
 
 
 		printf("cash is: %d", *cash);
 
-
-
 	}
-
 
 
 	else if (strstr(order, "put")) {
@@ -1315,19 +1261,12 @@ read(anbar first, class costumer men[], class food food[], int *cash) {
 
 		change(order, food);
 
-
-
 		ptr = ptr->link;
-
 
 
 		while (ptr != NULL)
 
-
-
 		{
-
-
 
 			if (ptr->sign == 0)
 
@@ -1345,68 +1284,34 @@ read(anbar first, class costumer men[], class food food[], int *cash) {
 
 				if (time(NULL) - (ptr->timeC) > food[j].timep)
 
-
-
 					ptr->sign = 1;
 
 
-
 			}
-
 
 
 			if (strstr(order, ptr->name) && ptr->sign == 0)
 
-
-
 			{
 
-
-
 				printf("not ready");
-
-
-
 				t++;
-
-
 
 			}
 
-
-
 			ptr = ptr->link;
-
-
 
 		}
 
-
-
 		anbar before = first;
-
-
 
 		if (t == 0)
 
-
-
 		{
 
-
-
 			ptr = first;
-
-
-
 			while (ptr->link != NULL)
-
-
-
 			{
-
-
-
 				ptr = ptr->link;
 
 
@@ -1477,6 +1382,7 @@ read(anbar first, class costumer men[], class food food[], int *cash) {
 				men[i].sign = 0;
 			}
 			else {
+				// با دادن غذا در موعد مقرر زمان مشتری بیشتر میشود ، متغیر کمکی اِل چک میکند که آیامشتری همه یذا های مورد نظر خودرا تحویل گرفته یا نه 
 				men[i].list[j] = 2;
 				men[i].timew += 10;
 				int k;
@@ -1501,6 +1407,7 @@ read(anbar first, class costumer men[], class food food[], int *cash) {
 	}
 	else if (strstr(order, "cook"))
 	{
+		//هنگامی که کاربر در دستور خود کلمه ی کوک را مینویسد ، درون لیست پیوندی انبار آخرین گره یک گره ی تازه پیدا میکند که غذای جدید است 
 		int i, g;
 		for (i = 0; food[i].price; i++)
 		{
@@ -1534,7 +1441,7 @@ read(anbar first, class costumer men[], class food food[], int *cash) {
 		}
 	}
 }
-
+//تمامی عناصری که برای سیو کردن بازی نیاز هستند توسط اف رایت درون فایل اف پی ریخته میشوند 
 void save(class food food[], class costumer men[], anbar first, char food1[], char order[], int *cash, int *savetime) {
 	FILE *fp;
 	register int i;
