@@ -1269,7 +1269,7 @@ read(anbar first, class costumer men[], class food food[], int *cash) {
 
 
 					printf("person number %d :%s: tahvil gerefte\n", i, food[j].name);
-printf("zamane baghi mande=%d", (time(NULL) - men[i].timev));
+
 }
 
 			}
@@ -1283,7 +1283,7 @@ printf("zamane baghi mande=%d", (time(NULL) - men[i].timev));
 		}
 
 
-
+printf("zamane baghi mande=%d", (time(NULL) - men[i].timev));
 	}
 
 	// اگر کاربر چک را نوشت مقادیر انبار با تابع دیسپلای فراخوانی میشوند
