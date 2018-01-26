@@ -188,7 +188,7 @@ void edit(class food food[]) {
 		for (j = 0; j<2; j++)
 		{
 			cout << "\n" << "mavad avalie ghaza ra vared konid ?" << "\n";
-			cin >> s;
+			scanf("%s",s);
 			if (s == '\0')
 				break;
 			else
