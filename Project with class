@@ -1041,7 +1041,7 @@ void save(class food food[], class costumer men[], anbar first, char food1[], ch
 
 	fwrite(cash, sizeof(int), 1, fp);
 
-	fwrite(savetime, sizeof(int), 1, fp);
+	fwrite(&savetime, sizeof(int), 1, fp);
 
 	for (i = 0; i<7; i++) {
 
@@ -1049,9 +1049,9 @@ void save(class food food[], class costumer men[], anbar first, char food1[], ch
 
 	}
 
-	fwrite(order, sizeof(order), 1, fp);
+	fwrite(&order, sizeof(order), 1, fp);
 
-	fwrite(food1, sizeof(food1), 1, fp);
+	fwrite(&food1, sizeof(food1), 1, fp);
 
 	anbar ptr = first;
 
@@ -1091,9 +1091,9 @@ void load(class food food[], class costumer men[], anbar first, char food1[], ch
 
 	}
 	// صندوق را سیو میکند 
-	fread(cash, sizeof(int), 1, fp);
+	fread(&cash, sizeof(int), 1, fp);
 	// زمانی را که در لحظه ی سیو داشته ایم سیو میکند
-	fread(savetime, sizeof(int), 1, fp);
+	fread(&savetime, sizeof(int), 1, fp);
 	// اطلاعات مشتری هارا سیو میکند
 	for (i = 0; i<7; i++) {
 
@@ -1101,9 +1101,9 @@ void load(class food food[], class costumer men[], anbar first, char food1[], ch
 
 	}
 	// دستور تایپ شده را سیو میکند
-	fread(order, sizeof(order), 1, fp);
+	fread(&order, sizeof(order), 1, fp);
 	//
-	fread(food1, sizeof(food1), 1, fp);
+	fread(&food1, sizeof(food1), 1, fp);
 
 	anbar ptr = first;
 
@@ -1128,7 +1128,7 @@ int menu(void) {
 
 	char answer[10];
 
-	clrscr();
+	//clrscr();
 
 
 
@@ -1136,15 +1136,15 @@ int menu(void) {
 	// برای شروع بازی 
 	printf("s)for starting the game \n");
 
-	gotoxy(20, 6);
+	//gotoxy(20, 6);
 	//برای اضافه کردن غذا
 	printf("a)for adding a food \n");
 
-	gotoxy(20, 8);
+	//gotoxy(20, 8);
 	// برای ادیت غذا
 	printf("c)for editing a food \n");
 
-	gotoxy(20, 10);
+	//gotoxy(20, 10);
 	//برای خروج
 	printf("e)for exit the game \n ");
 
