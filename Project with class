@@ -367,7 +367,7 @@ read(anbar first, class costumer men[], class food food[], int *cash) {
 	gets(order);
 	int d = 0;
 	// مقدار رندوم دادن به مشتری ها
-	rnd();
+	//rnd();
 	anbar ptr = first;
 	// همه ی مقادیر سیو میشوند
 	if (strstr(order, "save")) {
@@ -393,19 +393,21 @@ read(anbar first, class costumer men[], class food food[], int *cash) {
 	}
 	// اگر کاربر نِکست را نوشت ، اینکه کدام مشتری هاغذا را تحویل گرفته یا نگرفته اند نمایش داده میشود
 	else if (strstr(order, "next")) {
-		int i, j;
+		int i, j, z = 0;
 		for (i = 0; i<7 && men[i].sign; i++) {
+			z = 0;
 			for (j = 0; j<10; j++) {
 				if (men[i].sign = 1) {
 					if (men[i].list[j] == 1) {
 						cout << "person number" << i << ":" << food[j].name << ": tahvil nagerefte" << "\n";
+						z++;
 					}
 					else if (men[i].list[j] == 2)
 						cout << "person number" << i << ":" << food[j].name << ": tahvil gerefte" << "\n";
 
 				}
 				printf("\n");
-			}
+			} if(z!=0)
 			cout << "zamane baghi mande=" <<(men[i].timew - (time(NULL) - men[i].timev));
 		}
 
@@ -540,6 +542,7 @@ read(anbar first, class costumer men[], class food food[], int *cash) {
 			}
 		}
 	}
+	rnd();
 }
 
 void save(class food food[], class costumer men[], anbar first, char food1[], char order[], int *cash, int *savetime) {
