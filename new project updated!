@@ -460,7 +460,7 @@ void display(anbar first) {
 
 		ptr = ptr->link;
 
-		printf("%s", ptr->name);
+		printf("%s\n", ptr->name);
 
 	}
 
