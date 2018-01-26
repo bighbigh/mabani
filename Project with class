@@ -1,459 +1,927 @@
 #include "stdafx.h"
+
 #include<iostream>
+
 #include<time.h>
+
 #include<string.h>
+
 #include<stdlib.h>
+
 #include<ctype.h>
+
 #include<conio.h>
 
-char order[10], food1[20];
+
+
+char order[10], food1[20];//متغیر اردر برای دستور ورودی در تابع مین و متغیر فود1،متغیری کمکی است برای اجرای درست 
+
 char c[2][20];
+
 class costumer {
+	//کلاس مشتری ها 
 public:
 
+
+	//(مشخص کننده اینکه آیا مشتری در فروشگاه حاضر است (1)یا نه(0
 	int sign;
 
+
+	// زمان ورود مشتری به فروشگاه
 	int timev;
 
+
+	//زمانیکه مشتری منتظر میشود
 	int timew;
 
+
+	//غذاهایی که مشتری سفارش میدهد
 	int list[10];
 
+
+
 };
+
 class costumer men[7];
+//ساختمان غذاهای بازی 
 class food {
+
 public:
 
+
+	//نام غذا
 	char name[50];
 
+
+	//قیمت غذا
 	int price;
 
+
+	//آرایه ای از مواد اولیه ای که برای ساخت غذا نیاز است 
 	char prime[20][20];
 
+
+	//زمان آماده شدن غذا
 	int timep;
+	//متغیری که مشخص میکند غذا از نوع مواد اولیه است (مثل نان)یا اینکه غذای کامل است (مثل ساندویچ مرغ )یا اینکه نوشیدنی است 
 	int sign;
+	//ظرفیت غذا در انبار 
 	int capacity;
+
 };
+
 class food food[100];
+
 void rnd() {
+	//تابعی که مشتری ها را به طور رندوم وارد فروشگاه میکند 
+
 
 	int i, j, k, h = 0;
+
 	int l = 0;
+
 	for (i = 0; i < 7; i++)
+
 	{
 
+
+		// اگر شاخصه علامت مشتری صفر بود ، به آن به طور رندوم مقدار دهی میکند .
 		if (men[i].sign == 0)
+
 		{
+
 			memset(men[i].list, 0, 10);
+
 			srand((h++) + time(NULL));
+			//اگر مشتری هنوز در فروشگاه نبود ، در نصف حالات مشتری جدید اضافه میکند
 			men[i].sign = rand() % 2;
 
+
+
 			if (men[i].sign == 0)
+
 			{
+
+
 
 			}
 
+
+
 			else
+
 			{
+
 				printf("person number %d\n", i);
+
+
 
 				men[i].timev = time(NULL);
 
+
+
 				men[i].timew = rand() % 30 + 20;
+
 				l = 0;
+
 				for (j = 0; food[j].price; j++)
+
 				{
+
+
 
 					srand(time(NULL) + (h++));
 
+
+
 					k = rand();
 
+					//در اینجا شرط دوم برای اینست که یکوقت فرد ماده اولیه سفارش ندهد
+
 					if (k % 3 == 0 && food[j].sign != 0)
+
 					{
+
 						l++;
+
 						men[i].list[j] = 1;
+
 						printf("%s  ", food[j].name);
+
 					}
 
+
+
 				}
-				if (l == 0) { men[i].list[3] == 1; printf("%s ", food[3].name); }
+
+				if (l == 0) { men[i].list[5] = 1; printf("%s ", food[3].name); }
+
 				printf("\n%d\n", men[i].timew);
+
 			}
+
+
 
 		}
 
+
+
 	}
 
+
+
 }
+//تابعی که آرایه ای از اعداد را میگیرد و چک میکند که یکوقت همه  ی عناصر آرایه صفر نباشند 
 int sum(int a[]) {
+
 	int i, s = 0;
+
 	for (i = 0; i<100; i++) {
+
 		if (a[i] == 1)
+
 			s++;
+
 	}
+
 	if (s>0)
+
 		return 0;
+
 	else
+
 		return 1;
+
 }
+
 int check(char a[], class food food[]) {
+
+
 
 	int i;
 
+
+
 	for (i = 0; food[i].price; i++)
+
 	{
+
+
 
 		if (strcmp(food[i].name, a) == 0)
 
+
+
 			return i;
+
 	}
 
 
+
+
+
 }
+// تا بع ساخت غذا 
 void sakht(class food food[]) {
+
 	char s[120];
+
 	int i, k, j;
+
 	for (i = 0; food[i].price; i++);
+
 	printf("\n what is the name of food\n");
+
 	gets(food[i].name);
+
 	printf("\n what is the price of food\n");
+
 	scanf("%d", &food[i].price);
+
 	printf("\nis it a prime food? if yes press 0 else press 1\n");
+
 	scanf("%d", &k);
+
 	if (k == 1) {
+
 		food[i].timep = 0;
+
 		for (j = 0; j<2; j++)
+
 		{
+
 			printf("what is the prime needed for this food");
+
 			scanf("%s", s);
+
 			if (s == '\0')
+
 				break;
+
+
 
 			else
 
+
+
 				strcpy(food[i].prime[j], s);
+
 		}
+
 		food[i].sign = 1;
+
 	}
+
 	else {
+
 		printf("\n how much time it takes to prepare it?\n");
-			scanf("%d", &food[i].timep);
+
+		scanf("%d", &food[i].timep);
+
 		strcpy(food[i].prime[0], food[i].name);
+
 		food[i].sign = 0;
+
 	}
+
 }
+
 void edit(class food food[]) {
+
+
 
 	char s[20];
 
+
+printf("\n nam ghazaye morede nazar chist ?\n");
 	gets(s);
+
+
+	
 
 	int i;
 
+
+
 	for (i = 0; food[i].price && strcmp(food[i].name, s) != 0; i++)
+
 	{
+
+
+
 
 
 	}
 
+
+	printf("\n what's the price of the food ?\n");
+
 	scanf("%d", &food[i].price);
+
 	int j;
+
 	if (food[i].sign == 1) {
+
 		for (j = 0; j<2; j++)
+
 		{
+
+
+			printf("\n mavad avalie ghaza ra vared konid ?\n");
 
 			gets(s);
 
+
+
 			if (s == '\0')
+
 				break;
+
+
 
 			else
 
+
+
 				strcpy(food[i].prime[j], s);
+
 		}
+
 	}
+
 	else {
+		printf("\n zamane pokht ra vared konid ?\n");
+
 		scanf("%d", &food[i].timep);
+
 	}
+
 }
+//یعنی غذای نهایی را تشخیص میدهد)ی تابعی کمکی است که غذایی هایی که پوت کرده ایم را به تابع گیو میدهد 
 void change(char a[], class food food[]) {
+
 	int i, j;
+
 	int s = 0;
+
 	memset(c[0], 0, strlen(c[0]));
+
 	memset(c[1], 0, strlen(c[1]));
+
 	for (i = 0; food[i].price; i++) {
+
 		if (strstr(a, food[i].name) && food[i].sign != 1) {
+
 			strcpy(c[s], food[i].name);
+
 			s++;
+
 		}
 
 
+
+
+
 	}
+
 	if (s == 1) {
+
 		strcpy(food1, c[0]);
+
 	}
+
 	else {
+
 		s = 0;
+
 		int k;
 
+
+
 		for (i = 0; food[i].price; i++) {
+
 			s = 0;
+
 			for (j = 0; j<2; j++) {
+
 				for (k = 0; k<10; k++) {
+
 					if (!strcmp(food[i].prime[k], c[j])) {
+
 						s++;
+
 					}
+
 				}
 
+
+
 			}
+
 			if (s == 2)
+
 				break;
+
 		}
+
 		strcpy(food1, food[i].name);
+
 	}
-	printf("qqqqqqqqqqq%sqqqqqqqqq", food1);
+
+	printf("%s \n", food1);
+
+
 
 }
+// لیست پیوندی انبار که شامل چیزهایی است که ما در انبارمان کوک کرده ایم
 typedef class Anbar* anbar;
+
 class Anbar {
+
 public:
+
 	char name[20];
+
 	int timeC;
+
 	int sign;
+
 	anbar link;
+
 	friend class linkedlist;
+
 };
+
 class linkedlist {
+
 };
+// تابع نمایش دهنده انبارمان 
 void display(anbar first) {
+
 	anbar ptr = first;
+
 	while (ptr->link != NULL) {
+
 		ptr = ptr->link;
-		printf("%s", ptr->name);
+
+		printf("%s \n", ptr->name);
+
 	}
+
 }
+// تابعی که کل هزینه ی فرد را محاسبه میکند 
 int hazine(class costumer men[], int i) {
+
 	int j, s = 0;
+
 	for (j = 0; j<10; j++) {
+
 		if (men[i].list[j])
+
 			s += food[j].price;
+
 	}
+
 	return s;
+
 }
 
+
+// تابع منو که خواسته ی مشتری را برمیگرداند
 int menu(void);
 
+
+// تابع اصلی که دستور را میگیرد و خواسته مشتری را اجرا میکند
 void read(anbar first, class costumer men[], class food food[], int *cash);
-void save(class food food[], class costumer men[], anbar first, char food1[], char order[], int *cash);
-void load(class food food[], class costumer men[], anbar first, char food1[], char order[], int *cash);
+// تابع سیو بازی 
+void save(class food food[], class costumer men[], anbar first, char food1[], char order[], int *cash, int *savetime);
+// تابع لود بازی
+void load(class food food[], class costumer men[], anbar first, char food1[], char order[], int *cash, int *savetime);
+// متغیر کمکی برای سیو زمان بازی ، در زمانی که میخواهیم سیو شود ، مقدار زمان را در خودش نگه میدارد و موقع لود همه ی زمان ها را به اندازه ی time - savetime شیفت میدهیم
 int savetime = 0;
+
 int main() {
+	//صندوق دخل بازی 
 	int cash = 0;
+	// عنصر اول لیست پیوندی انبار ما 
 	anbar first;
+
 	first = (Anbar*)malloc(sizeof(Anbar));
+
 	first->link = NULL;
 
+
+
 	int i;
+
 	for (i = 0; i<100; i++) {
+
 		food[i].price = 0;
+
 	}
+	//مقدار دهی اولیه به مشتری ها که یکوقت کامپیایر مقادیر نامربوط در آنها قرار ندهد (در نظر داشته باشید که ما فرض کردیم در لحظه ی ابتدایی مشتری وجود ندارد و پس از شروع بازی مشتری ها به صورت رندوم قرار میگیرند
 	memset(men[0].list, 0, 100);
+
 	memset(men[1].list, 0, 100);
+
 	memset(men[2].list, 0, 100);
+
 	memset(men[3].list, 0, 100);
+
 	memset(men[4].list, 0, 100);
+
 	memset(men[5].list, 0, 100);
+
 	memset(men[6].list, 0, 100);
+	// مقدار غذاهای اولیه درون ساختمان غذا مقدار دهی میشوند
 	strcpy(food[0].name, "sandwich morgh");
+
 	food[0].price = 10;
+
 	food[0].timep = 0;
+
 	food[0].sign = 1;
+
 	strcpy(food[0].prime[0], "morgh");
+
 	strcpy(food[0].prime[1], "nan");
+
 	strcpy(food[1].name, "sandwich goosht");
+
 	food[1].price = 14;
+
 	food[1].sign = 1;
+
 	food[1].timep = 0;
+
 	strcpy(food[1].prime[0], "goosht");
+
 	strcpy(food[1].prime[1], "nan");
+
 	strcpy(food[2].name, "morgh");
+
 	food[2].price = 8;
+
 	food[2].timep = 10;
+
 	food[2].capacity = 3;
+
 	food[2].sign = 0;
+
 	strcpy(food[2].prime[0], "morgh");
+
 	strcpy(food[3].name, "goosht");
+
 	food[3].price = 12;
+
 	food[3].sign = 0;
+
 	food[3].timep = 3;
+
 	food[3].capacity = 3;
+
 	strcpy(food[3].prime[0], "goosht");
+
 	strcpy(food[4].name, "nan");
+
 	food[4].price = 2;
+
 	food[4].timep = 1;
+
 	food[4].capacity = 4;
+
 	food[4].sign = 2;
+
 	strcpy(food[4].prime[0], "nan");
+
 	strcpy(food[5].name, "nushabe");
+
 	food[5].price = 3;
+
 	food[5].sign = 2;
+
 	food[5].timep = 1;
+
 	food[5].capacity = 3;
+
 	strcpy(food[5].prime[0], "nushabe");
+
 	strcpy(food[6].name, "dugh");
+
 	food[6].price = 2;
+
 	food[6].timep = 1;
+
 	food[6].capacity = 3;
+
 	food[6].sign = 2;
+
 	strcpy(food[6].prime[0], "dugh");
+
 	for (i = 0; i<7; i++) {
+
 		men[i].sign = 0;
+
 	}
 
+	// تابع منو در انتها تعریف شده 
 	switch (menu()) {
+
 	case 'e':exit(1); break;
+
 	case 's':for (;;) {
-		read(first, men, food);
+
+		read(first, men, food, &cash);
+
 	} break;
-	case 'ed':edit(); break;
-	case 'a': Sakht(); break;
+
+	case 'c':edit(food); break;
+
+	case 'a': sakht(food); break;
+
 	default:printf("wrong order");
+
 	}
+
 }
+
 void
+
 read(anbar first, class costumer men[], class food food[], int *cash) {
+
 	gets(order);
-	int d;
+
+	int d = 0;
+	// مقدار رندوم دادن به مشتری ها 
 	rnd();
+
 	anbar ptr = first;
+	// همه ی مقادیر سیو میشوند
 	if (strstr(order, "save")) {
+
 		savetime = time(NULL);
-		save(food, men, first, food1, order, cash,savetime);
+
+		save(food, men, first, food1, order, cash, &savetime);
+
 	}
+	// اگر در دستور کلمه ی لود وجود داشت تابع لود فراخوانی میشود و برای اینکه زمانها ی قبلی درست بشوند به همه ی زمانهای ذخیره شده مقدار (زمان - زمان ذخیره شده) اضافه میگردد 
 	else if (strstr(order, "load")) {
-		load(food, men, first, food1, order, cash);
-		for (int i = 0;i<7; i++) {
+
+		load(food, men, first, food1, order, cash, &savetime);
+
+		for (int i = 0; i<7; i++) {
+
 			if (men[i].sign == 1) {
+
 				men[i].timev += time(NULL) - savetime;
+
 			}
+
 			anbar node;
+
 			node = (Anbar *)malloc(sizeof(Anbar));
+
 			anbar ptr = first;
-			
+
+
+
 			while (ptr->link != NULL)
+
 			{
+
 				ptr = ptr->link;
+
 				ptr->timeC += time(NULL) - savetime;
+
+			}
+
+
+
+		}
+
+	}
+	// اگر کاربر نِکست را نوشت ، اینکه کدام مشتری هاغذا را تحویل گرفته یا نگرفته اند نمایش داده میشود 
+	else if (strstr(order, "next")) {
+
+		int i, j;
+
+		for (i = 0; i<7 && men[i].sign; i++) {
+
+			for (j = 0; j<10; j++) {
+				if (men[i].sign=1){
+				if (men[i].list[j] == 1)
+
+					printf("person number %d :%s: tahvil nagerefte\n", i, food[j].name);
+				printf("zamane baghi mande=%d", (time(NULL) - men[i].timev));
+
+				else if (men[i].list[j] == 2)
+
+					printf("person number %d :%s: tahvil gerefte\n", i, food[j].name);
+}
+			}
+
+			printf("\n");
+
+		}
+
+	}
+	// اگر کاربر چک را نوشت مقادیر انبار با تابع دیسپلای فراخوانی میشوند 
+	else if (strstr(order, "check")) {
+
+		display(first);
+
+		printf("cash is: %d", *cash);
+
+	}
+
+	else if (strstr(order, "put")) {
+
+		int i, j, k, s = 0, t = 0, l;
+
+		change(order, food);
+
+		ptr = ptr->link;
+
+		while (ptr != NULL)
+
+		{
+
+			if (ptr->sign == 0)
+
+			{
+
+				for (j = 0; strcmp(food[j].name, ptr->name); j++);
+				// چک میکنیم که از زمان آماده شدن غذا گذشته است یا نه اگر گذشته باشد مقدار علامت آن در انبار را 1 میکنیم که یعنی غذا آماده شده 
+
+				if (time(NULL) - (ptr->timeC) > food[j].timep)
+
+					ptr->sign = 1;
+
+			}
+
+			if (strstr(order, ptr->name) && ptr->sign == 0)
+
+			{
+
+				printf("not ready");
+
+				t++;
+
+			}
+
+			ptr = ptr->link;
+
+		}
+
+		anbar before = first;
+
+		if (t == 0)
+
+		{
+
+			ptr = first;
+
+			while (ptr->link != NULL)
+
+			{
+
+				ptr = ptr->link;
+
+				if (strstr(order, ptr->name) && ptr->sign == 1)
+
+				{
+
+					before->link = ptr->link;
+
+					free(ptr);
+
+					ptr = before;
+
+				}
+
 			}
 
 		}
+
 	}
-	else if (strstr(order, "next")) {
-		int i, j;
-		for (i = 0; i<7 && men[i].sign; i++) {
-			for (j = 0; j<10; j++) {
-				if (men[i].list[j] == 1)
-					printf("person number %d :%s: tahvil nagerefte\n", i, food[j].name);
-				else if (men[i].list[j] == 2)
-					printf("person number %d :%s: tahvil gerefte\n", i, food[j].name);
-			}
-			printf("\n");
-		}
-	}
-	else if (strstr(order, "check")) {
-		display(first);
-		printf("cash is: %d", *cash);
-	}
-	else if (strstr(order, "put")) {
-		int i, j, k, s = 0, t = 0, l;
-		change(order, food);
-		ptr = ptr->link;
-		while (ptr != NULL)
-		{
-			if (ptr->sign == 0)
-			{
-				for (j = 0; strcmp(food[j].name, ptr->name); j++);
-				if (time(NULL) - (ptr->timeC) > food[j].timep)
-					ptr->sign = 1;
-			}
-			if (strstr(order, ptr->name) && ptr->sign == 0)
-			{
-				printf("not ready");
-				t++;
-			}
-			ptr = ptr->link;
-		}
-		anbar before = first;
-		if (t == 0)
-		{
-			ptr = first;
-			while (ptr->link != NULL)
-			{
-				ptr = ptr->link;
-				if (strstr(order, ptr->name) && ptr->sign == 1)
-				{
-					before->link = ptr->link;
-					free(ptr);
-					ptr = before;
-				}
-			}
-		}
-	}
+
 	else if (strstr(order, "give"))
+
 	{
 
+
+
 		int i, j, k, s = 0, t = 0, l;
+
 		for (i = 0; i < 7; i++)
+
 		{
+			//شماره ی فرد مورد نظر را اینجا پیدا میکند
 			if (strchr(order, i + '0'))
+
 				break;
+
 		}
+
+
 
 		s = 0;
+
 		for (j = 0; j<10; j++) {
+
 			if (!strcmp(food[j].name, food1) && men[i].list[j]) {
+
 				s++;
+
 				break;
+
 			}
+
 		}
+
 		if (s>0)
+
 		{
 
+
+			// چک میکند از زمان انتظار مشتری بیشتر طول نکشیده باشد 
 			if (time(NULL) - men[i].timev>men[i].timew) {
-				printf("tof tu rut");
+
+				printf("haji dir shode !");
+
 				d = 0;
+
 				for (j = 0; j<10; j++) {
+
 					if (men[i].list[j] == 2)
+
 						d -= 2;
+
 				}
+
 				men[i].sign = 0;
+
 			}
+
 			else {
+
 				men[i].list[j] = 2;
+
 				men[i].timew += 10;
+
 				int k;
+
 				l = 0;
+
 				for (k = 0; k<10; k++) {
+
 					if (men[i].list[k] == 1)
+
 						l++;
+
 				}
+
+
 
 				if (l == 0) {
+
 					printf("thanks");
+
 					d = hazine(men, i);
+
 					men[i].sign = 0;
+
 				}
+
 			}
+
 		}
+
 		else
+
 		{
+
 			printf("*****haji jooon!*****");
+
 			men[i].sign = 0;
 
 
+
+
+
 		}
+
 		*cash += d;
+
 	}
+
+
+
+
+
+
+
+
 
 
 
@@ -462,108 +930,215 @@ read(anbar first, class costumer men[], class food food[], int *cash) {
 
 
 	else if (strstr(order, "cook"))
+
 	{
+
+
 
 		int i, g;
 
+
+
 		for (i = 0; food[i].price; i++)
+
 		{
 
+
+
 			if (strstr(order, food[i].name))
+
 			{
 
+
+
 				anbar node;
+
 				node = (Anbar *)malloc(sizeof(Anbar));
+
 				anbar ptr = first;
+
 				g = 0;
+				// چک میشود که یکوقت انبار از غذای مورد نظر پر نباشد
+
 				while (ptr->link != NULL)
+
 				{
+
 					ptr = ptr->link;
+
 					if (!strcmp(food[i].name, ptr->name))
+
 						g++;
+
 				}
+
 				if (g<food[i].capacity) {
+
 					strcpy(node->name, food[i].name);
+
 					node->timeC = time(NULL);
+
 					node->sign = 0;
+
 					node->link = NULL;
+
 					ptr->link = node;
+
 				}
+
 				else
+
 					printf("haji Pore !");
+
 				//Check-capacity(node->name,)
+
 				break;
+
 			}
+
+
 
 		}
 
+
+
 	}
 
+
+
 }
-void save(class food food[], class costumer men[], anbar first, char food1[], char order[], int *cash,int *savetime) {
+
+void save(class food food[], class costumer men[], anbar first, char food1[], char order[], int *cash, int *savetime) {
+
 	FILE *fp;
+
 	register int i;
-	fp = fopen("file.text", "wb");
+
+	fp = fopen("u", "wb");
+
 	if (!fp) {
-		printf("\n haji save nemishe");
-		getch();
-		return;
+
+	printf("\n haji save nemishe");
+
+	getch();
+
+	return;
+
 	}
-	fwrite(&cash, sizeof(int), 1, fp);
-	fwrite(&savetime, sizeof(int), 1, fp);
+
+	fwrite(cash, sizeof(int), 1, fp);
+
+	fwrite(savetime, sizeof(int), 1, fp);
+
 	for (i = 0; i<7; i++) {
+
 		fwrite(&men[i], sizeof(class costumer), 1, fp);
+
 	}
-	fwrite(&order, sizeof(char), 1, fp);
-	fwrite(&food1, sizeof(strlen(food1)), 1, fp);
+
+	fwrite(order, sizeof(order), 1, fp);
+
+	fwrite(food1, sizeof(food1), 1, fp);
+
 	anbar ptr = first;
 
+
+
 	while (ptr->link) {
+
 		fwrite(&ptr, sizeof(class Anbar), 1, fp);
+
 		ptr = ptr->link;
 
+
+
 	}
+
 	fclose(fp);
+
 	printf("save gardid!");
+
 }
-void load(class food food[], class costumer men[], anbar first, char food1[], char order[], int *cash,int *savetime) {
+
+void load(class food food[], class costumer men[], anbar first, char food1[], char order[], int *cash, int *savetime) {
+
 	FILE *fp;
+
 	register int i;
-	fp = fopen("file.text", "rb");
+
+	fp = fopen("u", "rb");
+	// اگر مشکلی در زمینه ی باز کردن فایل پیش بیاید اینجا پیغام خطا میگیریم 
 	if (!fp) {
-		printf("\n haji load nemishe");
-		getch();
-		return;
+
+	printf("\n haji load nemishe");
+
+	getch();
+
+	return;
+
 	}
-	fread(&cash, sizeof(int), 1, fp);
-	fread(&savetime, sizeof(int), 1, fp);
+	// صندوق را سیو میکند 
+	fread(cash, sizeof(int), 1, fp);
+	// زمانی را که در لحظه ی سیو داشته ایم سیو میکند
+	fread(savetime, sizeof(int), 1, fp);
+	// اطلاعات مشتری هارا سیو میکند
 	for (i = 0; i<7; i++) {
+
 		fread(&men[i], sizeof(class costumer), 1, fp);
+
 	}
-	fread(&order, sizeof(char), 1, fp);
-	fread(&food1, sizeof(strlen(food1)), 1, fp);
+	// دستور تایپ شده را سیو میکند
+	fread(order, sizeof(order), 1, fp);
+	//
+	fread(food1, sizeof(food1), 1, fp);
+
 	anbar ptr = first;
 
+
+	//انبار را سیو میکند 
 	while (ptr->link) {
+
 		fread(&ptr, sizeof(Anbar), 1, fp);
+
 		ptr = ptr->link;
 
+
+
 	}
+	if(feof(fp)){
+
 	printf("load gardid ! \n");
 }
+}
+
 int menu(void) {
+
 	char answer[10];
+
 	clrscr();
 
+
+
 	gotoxy(20, 4);
+	// برای شروع بازی 
 	printf("s)for starting the game \n");
+
 	gotoxy(20, 6);
+	//برای اضافه کردن غذا
 	printf("a)for adding a food \n");
+
 	gotoxy(20, 8);
-	printf("ed)for editing a food \n");
+	// برای ادیت غذا
+	printf("c)for editing a food \n");
+
 	gotoxy(20, 10);
+	//برای خروج
 	printf("e)for exit the game \n ");
+
 	gets(answer);
+
 	return tolower(*answer);
+
+
 
 }
