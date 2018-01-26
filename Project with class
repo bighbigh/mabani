@@ -37,7 +37,7 @@ class food food[100];
 void rnd (){
 
 int i, j, k,h=0;
-
+int l-0;
 for (i = 0; i < 7; i++)
     {
 
@@ -59,7 +59,7 @@ if (men[i].sign == 0)
 men[i].timev = time (NULL);
 
 men[i].timew = rand() % 30 + 20;
-
+l=0;
 for (j = 0; food[j].price; j++)
 		{
 
@@ -69,12 +69,13 @@ k = rand ();
 
 if (k % 3 == 0 && food[j].sign!=0)
 		    {
-
+l++;
 men[i].list[j] = 1;
 printf("%s  ",food[j].name);
 }
 
 }
+if(l==0){men[i].list[3]==1; printf("%s ",food[3].name);}
 printf("\n%d\n",men[i].timew);
 }
 
