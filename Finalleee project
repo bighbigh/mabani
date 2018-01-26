@@ -922,7 +922,7 @@ void display(anbar first) {
 
 
 
-		printf("%s", ptr->name);
+		printf("%s\n", ptr->name);
 
 
 
