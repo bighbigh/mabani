@@ -141,7 +141,7 @@ strcpy(food[i].prime[0],food[i].name);
 food[i].sign=0;
 }
 }
-void edit (void){
+void edit (class food food[]){
 
 char s[20];
 
