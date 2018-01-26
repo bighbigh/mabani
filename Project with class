@@ -109,20 +109,22 @@ return i;
 
 
 }
-void Sakht (){
+void sakht (class food food[]){
 char s[120];
-int i,k;
+int i,k,j;
 for (i = 0; food[i].price; i++);
+printf("\n what is the name of food\n");
 gets (food[i].name);
+printf("\n what is the price of food\n");
 scanf ("%d", &food[i].price);
-int j;
+printf("\nis it a prime food? if yes press 0 else press 1\n");
 scanf("%d",&k);
 if(k==1){
         food[i].timep=0;
 for (j = 0;j<2; j++)
     {
-gets (s);
-
+printf("what is the prime needed for this food");
+scanf("%s",s);
 if (s == '\0')
 	break;
 
@@ -130,11 +132,13 @@ if (s == '\0')
 
 strcpy (food[i].prime[j], s);
 }
-
+food[i].sign=1;
 }
 else{
+printf("\n how much time it takes to prepare it?\n"
 scanf ("%d", &food[i].timep);
 strcpy(food[i].prime[0],food[i].name);
+food[i].sign=0;
 }
 }
 void edit (void){
