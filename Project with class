@@ -629,18 +629,31 @@ int main() {
 
 	case 'e':exit(1); break;
 
-	case 's':for (;;) {
+	case 's':
+		printf("Haji Bazi shoru shod ! \n")
+		for (;;) {
 
 		read(first, men, food, &cash);
 
 	} break;
 
-	case 'c':edit(food); break;
+	case 'c':edit(food); 
+		printf("Haji Bazi shoru shod ! \n")
+		for (;;) {
 
-	case 'a': sakht(food); break;
+		read(first, men, food, &cash);
+
+	}  break;
+
+	case 'a': sakht(food); printf("Haji Bazi shoru shod ! \n");
+		for (;;) {
+
+		read(first, men, food, &cash);
+
+	}  break;
 
 	default:printf("wrong order");
-
+		exit(1);
 	}
 
 }
@@ -763,7 +776,7 @@ read(anbar first, class costumer men[], class food food[], int *cash) {
 
 			{
 
-				printf("not ready");
+				printf("not ready \n");
 
 				t++;
 
@@ -847,7 +860,7 @@ read(anbar first, class costumer men[], class food food[], int *cash) {
 			// چک میکند از زمان انتظار مشتری بیشتر طول نکشیده باشد 
 			if (time(NULL) - men[i].timev>men[i].timew) {
 
-				printf("haji dir shode !");
+				printf("haji dir shode ! \n");
 
 				d = 0;
 
@@ -885,7 +898,7 @@ read(anbar first, class costumer men[], class food food[], int *cash) {
 
 				if (l == 0) {
 
-					printf("thanks");
+					printf("thanks \n" );
 
 					d = hazine(men, i);
 
@@ -901,7 +914,7 @@ read(anbar first, class costumer men[], class food food[], int *cash) {
 
 		{
 
-			printf("*****haji jooon!*****");
+			printf("*****haji jooon!***** \n");
 
 			men[i].sign = 0;
 
