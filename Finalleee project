@@ -1125,7 +1125,11 @@ fwrite(&k, sizeof(int), 1, fp);
 		fwrite(&men[i], sizeof(class costumer), 1, fp);
 
 	}
+	for (i = 0; food[i].price; i++) {
 
+		fwrite(&food[i], sizeof(class costumer), 1, fp);
+
+	}
 	fwrite(order, sizeof(order), 1, fp);
 
 	fwrite(food1, sizeof(food1), 1, fp);
@@ -1199,7 +1203,11 @@ for(l=0;l<k;l++){
 		fread(&men[i], sizeof(class costumer), 1, fp);
 
 	}
+for (i = 0; food[i].price; i++) {
 
+		fread(&food[i], sizeof(class costumer), 1, fp);
+
+	}
 	// دستور تایپ شده را سیو میکند
 
 	fread(order, sizeof(order), 1, fp);
