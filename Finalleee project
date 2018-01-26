@@ -1099,7 +1099,7 @@ while (ptr->link!=NULL) {
 ptr=ptr->link;
 k++;
 	}
-	printf("%d",k);
+	
 	FILE *fp;
 
 	register int i;
